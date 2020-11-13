@@ -1,0 +1,34 @@
+{
+  "pages":[
+    "pages/home/home",
+    "pages/index/index",
+    "pages/logs/logs"
+    
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#9932CD",
+    "navigationBarTitleText": "嘎嘎子的菜篮子",
+    "navigationBarTextStyle":"black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  
+  "tabBar":{
+    "color": "#a9b7b7",  
+    "selectedColor": "#11cd6e",  
+    "borderStyle": "black" ,
+    "list": [{  
+      "selectedIconPath": "images/icon_thing_press.png",  
+      "iconPath": "images/icon_thing.png",  
+      "pagePath": "pages/home/home",  
+      "text": "goods"  
+    },{
+      "selectedIconPath": "images/icon_person_press.png",
+      "iconPath": "images/icon_person.png",
+      "pagePath": "pages/index/index",
+      "text": "about"
+    }]
+  }
+  
+}

@@ -1,0 +1,42 @@
+<!--home.wxml-->
+<!-- <block wx:for="{{goods_list}}">
+  <view> {{item.name}}</view>
+</block> -->
+
+<!-- <template name="gItem">
+          <view>
+            <view>
+              <text>{{name}}</text>
+              <button>-</button>
+              <input type="number" value="{{num}}" confirm-type="done"/>
+              <button>+</button>
+            </view>
+          </view>
+          <!-- <view class='content_text'>
+            <text >{{data_content_text}}</text>
+          </view> -->
+<!-- </template> -->
+
+
+<view wx:for="{{goods_list}}">
+
+  <text>{{item.name}}</text>
+
+  <view>
+    <!-- <template is="gItem" data="{{...item}}"/> -->
+      <text bindtap="decreaseCount" data-index="{{index}}">-</text>
+      <text>{{item.num}}</text>
+      <text bindtap="addCount" data-index="{{index}}">+</text>
+  </view>
+
+</view>
+
+
+<view > 
+  <button class="show" type="primary" bindtap="modalinput">
+  add
+  </button> 
+</view>
+<modal hidden="{{hiddenmodalput}}" title="Goods name" confirm-text="submit" cancel-text="cancel" bindcancel="cancel" bindconfirm="confirm"> 
+ <input bindinput="obtain_name" type='text'placeholder="please entering....."/>
+</modal>

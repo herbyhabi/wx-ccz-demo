@@ -1,0 +1,13 @@
+/* pages/home/home.wxss */
+.show {
+  bottom: 0px;
+  position: fixed;
+  margin-bottom: 46px;
+}
+
+.add_img {
+  width: 81rpx;
+  height: 81rpx;
+  margin-left: 14rpx;
+  margin-top: 30rpx;
+}
