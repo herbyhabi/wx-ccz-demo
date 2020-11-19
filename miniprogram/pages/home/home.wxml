@@ -1,0 +1,55 @@
+<!--home.wxml-->
+<!-- <block wx:for="{{goods_list}}">
+  <view> {{item.name}}</view>
+</block> -->
+
+<!-- <template name="gItem">
+          <view>
+            <view>
+              <text>{{name}}</text>
+              <button>-</button>
+              <input type="number" value="{{num}}" confirm-type="done"/>
+              <button>+</button>
+            </view>
+          </view>
+          <!-- <view class='content_text'>
+            <text >{{data_content_text}}</text>
+          </view> -->
+<!-- </template> -->
+
+<view class="contanier_all">
+  <view wx:for="{{goods_list}}" class="contanier_item">
+    <view class="left_content">
+      <image class="img_item" src="/images/icon_item.png"></image>
+      <text class="txt_name">{{item.name}}</text>
+    </view>
+      <view class="container_countchange">
+          <!-- 减少/增加按钮 -->
+          <text class="btn btn_decrease_num" bindtap="decreaseCount" data-index="{{index}}">-</text>
+          <view class="txt_num">{{item.num}}</view>
+          <text class="btn btn_add_num" bindtap="addCount" data-index="{{index}}">+</text>
+          <!-- 删除按钮 -->
+          <!-- <view class="del" catchtap="del" data-index="{{index}}">delete</view> -->
+          <view class="btndelete" bindtap="binddeleteitem" data-index="{{index}}"> × </view>
+      </view>
+  
+  </view>
+
+</view>
+
+
+<view class="container_addgoods"> 
+  <image class="btn btn_addgoods" src="/images/icon_add.png" bindtap="bindmodalinput"></image>
+</view>
+
+
+<modal hidden="{{hiddenmodalput}}" title="Goods name" confirm-text="save" cancel-text="cancel" bindcancel="cancel" bindconfirm="confirm"> 
+ <input value="{{goods_name}}" bindinput="bindobtain_name" type='text' placeholder="please entering..." focus="{{focue_value}}"/>
+</modal>
+
+
+<view class="container_empty" hidden="{{hiddenemptypart}}">
+  <image class="img_empty" src="/images/icon_empty.png"></image>
+  <view class="txt_empty">I'm so hugery!</view>
+</view>
+
