@@ -3,8 +3,11 @@
 <view class="all">
   <view class="title">今天吃什么呢？</view>
   <view class="all_block">
-    <view class="block left_block">oooo</view>
-    <view class="block right_block">rrrrr</view>
+    <view class="block left_block" >{{v_foods}}</view>
+    <view class="block right_block">{{m_foods}}</view>
+  </view>
+  <view class="container_choose_btn">
+    <text bindtap="bindtap_choose" class="txt_choose_btn">今天吃什么？</text>
   </view>
 </view>
 

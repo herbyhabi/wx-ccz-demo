@@ -174,8 +174,6 @@ Page({
 
     try {
 
-    
-    
       //添加记录到数据库
       var item={
         _openid: this.data.openid,

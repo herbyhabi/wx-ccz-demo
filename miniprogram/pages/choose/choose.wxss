@@ -36,3 +36,19 @@
 .right_block{
   margin-left: 10rpx;
 }
+
+.container_choose_btn{
+  position: fixed;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  background-color: #E1929A;
+  border-radius: 20%;
+  align-content: center;
+}
+
+.txt_choose_btn{
+  width: 250rpx;
+  height: 60rpx;
+  text-align: center;
+}
