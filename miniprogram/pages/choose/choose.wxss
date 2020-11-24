@@ -1,0 +1,38 @@
+/* pages/choose/choose.wxss */
+
+.all{
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 20rpx;
+
+}
+
+
+.all_block{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  height: 200rpx;
+  width: 100%;
+  flex-direction: row;
+}
+
+.block{
+  width: 300rpx;
+  border: 7rpx solid #E1929A;
+  justify-content: center;
+  border-radius: 10%;
+}
+
+.left_block{
+  margin-right: 10rpx;
+}
+
+.right_block{
+  margin-left: 10rpx;
+}

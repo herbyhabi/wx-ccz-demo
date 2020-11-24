@@ -1,7 +1,7 @@
 /* pages/home/home.wxss */
 
 .contanier_all{
-  margin-top: 30px;
+  margin-top: 20rpx;
   /* justify-content: center; */
 }
 

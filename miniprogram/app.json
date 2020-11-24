@@ -1,15 +1,15 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/home/home"
+    "pages/choose/choose",
+    "pages/logs/logs"
     
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarBackgroundColor": "#E1929A",
+    "navigationBarTitleText": "小小北冰箱",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
@@ -23,12 +23,12 @@
       "selectedIconPath": "images/icon_goods_press.png",  
       "iconPath": "images/icon_goods.png",  
       "pagePath": "pages/index/index",  
-      "text": "goods"  
+      "text": "我的菜"  
     },{
-      "selectedIconPath": "images/icon_person_press.png",
-      "iconPath": "images/icon_person.png",
-      "pagePath": "pages/logs/logs",
-      "text": "about"
+      "selectedIconPath": "images/icon_dinner_press.png",
+      "iconPath": "images/icon_dinner.png",
+      "pagePath": "pages/choose/choose",
+      "text": "吃什么"
     }]
   }
 }

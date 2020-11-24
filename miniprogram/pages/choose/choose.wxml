@@ -1,0 +1,10 @@
+<!--pages/choose/choose.wxml-->
+
+<view class="all">
+  <view class="title">今天吃什么呢？</view>
+  <view class="all_block">
+    <view class="block left_block">oooo</view>
+    <view class="block right_block">rrrrr</view>
+  </view>
+</view>
+
