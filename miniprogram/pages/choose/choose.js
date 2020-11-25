@@ -23,7 +23,7 @@ Page({
     var nowTime = util.getNowTimestamp()
     var value = wx.getStorageSync('foods')
     if(value){
-        if((nowTime - value.time)/(24*60*60*1000) > 3){
+        if((nowTime - value.getTime)/(24*60*60) > 3){
           this.getFoodsFromDB()
         }
     }else{
@@ -84,16 +84,10 @@ Page({
    * 从数据库中获取集合foods的数据
    */
   getFoodsFromDB: function(){
-    console.log('获取数据获取数据获取数据')
+    console.log('获取数据')
     var that = this
     db.collection(FOODS_COLLECTION).get({
       success: function(res){
-        console.log(res.data)
-        var index = Math.floor((Math.random()*res.data.length))
-        that.setData({
-          'foods_list': res.data
-        })
-
         var cache_foods = {
           foods: that.data.foods_list,
           getTime: util.getNowTimestamp()
@@ -104,27 +98,42 @@ Page({
     })
   },
 
-
   /**
    * 点击选择按钮则会运行该函数
-   * 会从集合中随机选择食物
+   * 从集合中随机选择食物
    */
 
   bindtap_choose: function(){
-    var  that = this
-    console.log('testtest')
-    db.collection(FOODS_COLLECTION).where({
-      type: "0"
-    })
-    .get({
-      success: function(res){
-        console.log(res.data)
-        var index = Math.floor((Math.random()*res.data.length))
-        that.setData({
-          'v_foods': res.data[index].name
-        })
+    var v_l = []
+    var m_l = []
+    var value = wx.getStorageSync('foods')
+    if(value){
+      this.setData({
+        foods_list: value.foods
+      })
+    }
+    var list = this.data.foods_list
+    for(var i=0; i<list.length; i++){
+      if(list[i].type=="0"){
+        v_l.push(list[i])
+      }else{
+        m_l.push(list[i])
       }
+    }
+    this.setData({
+      v_foods: this.getItemRandom(v_l).name,
+      m_foods: this.getItemRandom(m_l).name
     })
+   
+  },
+
+  /**
+   * 从列表中随机抽取一个元素
+   */
+  getItemRandom: function(list){
+    var index = Math.floor((Math.random()*list.length))
+    return list[index]
   }
+
 
 })

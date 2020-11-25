@@ -3,7 +3,10 @@
 <view class="all">
   <view class="title">今天吃什么呢？</view>
   <view class="all_block">
-    <view class="block left_block" >{{v_foods}}</view>
+    <view class="block left_block" >
+      <view class="flex-text">{{v_foods}}</view>
+      
+    </view>
     <view class="block right_block">{{m_foods}}</view>
   </view>
   <view class="container_choose_btn">
