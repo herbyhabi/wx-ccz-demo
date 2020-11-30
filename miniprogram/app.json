@@ -9,7 +9,7 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#E1929A",
-    "navigationBarTitleText": "小小北冰箱",
+    "navigationBarTitleText": "我的冰箱",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",

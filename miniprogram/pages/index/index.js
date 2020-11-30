@@ -160,7 +160,7 @@ Page({
       wx.showToast({
         title: 'name is required!',
         icon: "none",
-        duration: 1000,
+        duration: 500,
         mask:true
       })
       return
@@ -181,14 +181,16 @@ Page({
         num: 1,
         create_time: util.getNowTimestamp()
       }
+      this.data.goods_list.push(item)
+      this.setData({
+        goods_list: that.data.goods_list
+      })
+      console.log(that.data.goods_list)
+
       db.collection(GOODS_COLLECTION).add({
         data: item,
         success: function(res){
-          that.data.goods_list.push(item)
-          that.setData({
-            goods_list: that.data.goods_list
-          })
-          console.log(that.data.goods_list)
+          
         }
       })
       

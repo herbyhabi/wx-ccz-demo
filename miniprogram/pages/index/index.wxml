@@ -44,7 +44,7 @@
 
 
 <modal hidden="{{hiddenmodalput}}" title="名字" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm"> 
- <input value="{{goods_name}}" bindinput="bindobtain_name" type='text' placeholder="写点什么..." focus="{{focue_value}}"/>
+ <input value="{{goods_name}}" bindinput="bindobtain_name" type='text' placeholder="请输入..." focus="{{focue_value}}"/>
 </modal>
 
 

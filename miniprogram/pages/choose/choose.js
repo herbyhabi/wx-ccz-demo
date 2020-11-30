@@ -13,22 +13,32 @@ Page({
   data: {
     v_foods: '',
     m_foods: '',
-    foods_list:[]
+    foods_list:[],
+    hidden_img_inital: false
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+  
+
     var nowTime = util.getNowTimestamp()
     var value = wx.getStorageSync('foods')
     if(value){
+      if(value.foods.length != 0){
         if((nowTime - value.getTime)/(24*60*60) > 3){
           this.getFoodsFromDB()
         }
     }else{
+      console.log('testt')
       this.getFoodsFromDB()
     }
+    }else{
+      this.getFoodsFromDB()
+    }
+    
+    
   },
 
    /**
@@ -42,14 +52,18 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+  
   },
 
   /**
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-
+    this.setData({
+      v_foods: '',
+      m_foods: '',
+      hidden_img_inital: false
+    })
   },
 
   /**
@@ -84,12 +98,13 @@ Page({
    * 从数据库中获取集合foods的数据
    */
   getFoodsFromDB: function(){
-    console.log('获取数据')
+    console.log('从数据库中获取数据')
     var that = this
     db.collection(FOODS_COLLECTION).get({
       success: function(res){
+        console.log(res.data)
         var cache_foods = {
-          foods: that.data.foods_list,
+          foods: res.data,
           getTime: util.getNowTimestamp()
         }
         wx.setStorageSync('foods', cache_foods)
@@ -121,6 +136,7 @@ Page({
       }
     }
     this.setData({
+      hidden_img_inital: true,
       v_foods: this.getItemRandom(v_l).name,
       m_foods: this.getItemRandom(m_l).name
     })

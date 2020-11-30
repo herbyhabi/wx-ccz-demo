@@ -1,16 +1,20 @@
 <!--pages/choose/choose.wxml-->
 
 <view class="all">
-  <view class="title">今天吃什么呢？</view>
-  <view class="all_block">
-    <view class="block left_block" >
-      <view class="flex-text">{{v_foods}}</view>
-      
+  <view class="txt_subtitle">替你选择</view>
+  <view class="title">今天吃什么</view>
+  <view class="contanier_block">
+    <view class="block left_block">
+      <view class="flex-text">{{v_foods}}</view> 
+      <image class="img_inital" hidden="{{hidden_img_inital}}" src="/images/img_v.png"></image>
     </view>
-    <view class="block right_block">{{m_foods}}</view>
+    <view class="block right_block">
+      <view class="flex-text">{{m_foods}}</view> 
+      <image class="img_inital" hidden="{{hidden_img_inital}}" src="/images/img_m.png"></image>
+    </view>
   </view>
   <view class="container_choose_btn">
-    <text bindtap="bindtap_choose" class="txt_choose_btn">今天吃什么？</text>
+    <text bindtap="bindtap_choose" class="txt_choose_btn">选一选</text>
   </view>
 </view>
 
