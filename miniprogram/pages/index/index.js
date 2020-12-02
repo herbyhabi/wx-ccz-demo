@@ -2,7 +2,9 @@
 import util from '../../utils/util.js'
 
 const app = getApp()
-const db = wx.cloud.database()
+const db = wx.cloud.database({
+  env: app.globalData.env
+})
 const GOODS_COLLECTION = 'goods'
 
 Page({

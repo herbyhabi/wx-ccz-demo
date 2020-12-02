@@ -1,8 +1,11 @@
-
 // pages/choose/choose.js
+
 import util from '../../utils/util.js'
 
-const db = wx.cloud.database()
+const app = getApp()
+const db = wx.cloud.database({
+  env: app.globalData.env
+})
 const FOODS_COLLECTION = 'foods'
 
 Page({
@@ -27,7 +30,7 @@ Page({
     var value = wx.getStorageSync('foods')
     if(value){
       if(value.foods.length != 0){
-        if((nowTime - value.getTime)/(24*60*60) > 3){
+        if((nowTime - value.getTime)/(24*60*60) >0){
           this.getFoodsFromDB()
         }
     }else{

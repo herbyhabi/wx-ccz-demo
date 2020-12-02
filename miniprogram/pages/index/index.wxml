@@ -50,6 +50,6 @@
 
 <view class="container_empty" hidden="{{hiddenemptypart}}">
   <image class="img_empty" src="/images/icon_empty.png"></image>
-  <view class="txt_empty">冰冰子饿了～饿了～</view>
+  <view class="txt_empty">小北饿了, 快去买菜做饭吧～</view>
 </view>
 

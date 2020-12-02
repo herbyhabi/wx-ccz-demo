@@ -16,6 +16,7 @@ App({
     }
 
     this.globalData = {
+      env: 'release-9gx5rse33f08764f'
     }
   }
 })
