@@ -1,6 +1,7 @@
 //index.js
 import util from '../../utils/util.js'
 
+
 const app = getApp()
 const db = wx.cloud.database({
   env: app.globalData.env
@@ -74,6 +75,9 @@ Page({
     }
   },
 
+  /**
+   * 调用云函数，获取用户的Openid
+   */
   onGetOpenid: function() {
     // 调用云函数
     wx.cloud.callFunction({
@@ -90,6 +94,40 @@ Page({
       }
     })
   },
+
+  /**
+   * 调用云函数，检测文本内容是否符合内容安全规则
+   */
+  onSecurityCheck: function(content){
+    console.log(content)
+    var result = 0
+    wx.cloud.callFunction({
+      name: 'sercurityCheck',
+      data: {
+        content: content
+      },
+      success: res => {
+        console.log("test test test " )
+        console.log((res.result.errCode == 87014))
+        if(res.result.errCode == 87014){
+          wx.showToast({
+            title: '该名字不ok哦',
+          })
+           
+          result = -1
+          console.log(result)
+        }
+      },
+      fail: err => {
+        console.error('[云函数] [login] 调用失败', err)
+      }
+    })
+    console.log(result)
+    return result
+  },
+
+
+
 
   /**
    * Lifecycle function--Called when page show
@@ -155,6 +193,12 @@ Page({
 
   //modal框 confirm
   confirm: function(e){
+    
+    var result = this.onSecurityCheck(this.data.goods_name)
+    console.log("aaaaaaa" +result)
+    if(result == -1){
+      return
+    }
     var that = this
     var l_length = this.data.goods_list.length
     console.log('eweweeeeeeee'+l_length)
