@@ -1,7 +1,7 @@
 <!--pages/choose/choose.wxml-->
 
 <view class="all">
-  <view class="txt_subtitle">替你选择</view>
+  <view class="txt_subtitle">小北帮你选</view>
   <view class="title">今天吃什么</view>
   <view class="contanier_block">
     <view class="block left_block">

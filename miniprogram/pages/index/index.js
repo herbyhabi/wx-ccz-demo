@@ -156,11 +156,25 @@ Page({
   //modal框 confirm
   confirm: function(e){
     var that = this
+    var l_length = this.data.goods_list.length
+    console.log('eweweeeeeeee'+l_length)
+    if( l_length!=0){
+        for(var i=0; i<l_length; i++){
+          if(this.data.goods_list[i].name == this.data.goods_name){
+            wx.showToast({
+              title: '菜菜已经有啦~',
+              icon: "none",
+              duration: 500
+            })
+            return
+          }
+        }
+    }
 
     //名字为空，toast提示且不能保存
     if(this.data.goods_name==''){
       wx.showToast({
-        title: 'name is required!',
+        title: '名字不能为空哦~',
         icon: "none",
         duration: 500,
         mask:true
@@ -208,8 +222,9 @@ Page({
    },
 
   bindobtain_name: function(e){
+    var name = e.detail.value.replace(/\s/g, "")
     this.setData({
-      goods_name: e.detail.value
+      goods_name: name
     })
   },
 
@@ -245,7 +260,6 @@ Page({
 
   /**删除物品 */
   binddeleteitem(e){
-
     var that = this
     const index = e.currentTarget.dataset.index
     let list = this.data.goods_list
@@ -254,17 +268,18 @@ Page({
     this.setData({
       goods_list: list
     })
+    wx.showToast({
+      icon: 'success',
+      title: '删掉了～',
+      duration: 500
+    })
 
-    //删除对应的数据（根据名称和openid来查找）
+    //删除数据库中对应的数据（根据名称和openid来查找）
     db.collection(GOODS_COLLECTION).where({
       name: targetName,
       _openid: that.data.user_openid
     }).remove({
       success: function(res) {
-        wx.showToast({
-          icon: 'success',
-          title: '删掉了～'
-        })
         console.log(res.data)
       }
     })
