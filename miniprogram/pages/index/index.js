@@ -23,6 +23,7 @@ Page({
     focue_value: false,
     hiddenemptypart: true,
     user_openid: ''
+
   },
 
   onLoad: function() {
@@ -96,34 +97,29 @@ Page({
   },
 
   /**
-   * 调用云函数，检测文本内容是否符合内容安全规则
+   * 调用云函数，内容安全检测
+   * 为了避免造成阻塞，await 必须用在 async 函数中，async 函数调用不会造成阻塞
+   * content: 待检测的文本内容
    */
-  onSecurityCheck: function(content){
-    console.log(content)
-    var result = 0
-    wx.cloud.callFunction({
+  onSecurityCheck: async function(content){
+  var rs = await wx.cloud.callFunction({
       name: 'sercurityCheck',
       data: {
         content: content
-      },
-      success: res => {
-        console.log("test test test " )
-        console.log((res.result.errCode == 87014))
-        if(res.result.errCode == 87014){
-          wx.showToast({
-            title: '该名字不ok哦',
-          })
-           
-          result = -1
-          console.log(result)
-        }
-      },
-      fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
       }
+      // success: res => {
+      //   console.log("test test test " )
+      //   console.log((res.result.errCode == 87014))
+      //   return res
+      // },
+      // fail: err => {
+      //   console.error('[云函数] [login] 调用失败', err)
+      // }
     })
-    console.log(result)
-    return result
+    // get(rs).then(res =>{
+    //   console.log(res)
+    // })
+    return rs
   },
 
 
@@ -194,7 +190,10 @@ Page({
   //modal框 confirm
   confirm: function(e){
     
-    var result = this.onSecurityCheck(this.data.goods_name)
+    var result = this.onSecurityCheck(this.data.goods_name).then(function(res){
+      return res
+    })
+    
     console.log("aaaaaaa" +result)
     if(result == -1){
       return
