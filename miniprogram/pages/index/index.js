@@ -66,6 +66,30 @@ Page({
 
   },
 
+  /**
+   * Lifecycle function--Called when page show
+   */
+  onShow: function() {
+    var that = this;
+    //调用数据库，获取集合的数据
+    db.collection(GOODS_COLLECTION).get({
+      success: function(res){
+        that.setData({
+          'goods_list': res.data
+        })
+        if(res.data.length==0){
+          that.setData({
+            hiddenemptypart: false
+          })
+        }
+      }
+    })
+    
+  },
+
+  /**
+   * 获取用户基本信息
+   */
   onGetUserInfo: function(e) {
     if (!this.data.logged && e.detail.userInfo) {
       this.setData({
@@ -99,7 +123,7 @@ Page({
   /**
    * 调用云函数，内容安全检测
    * 为了避免造成阻塞，await 必须用在 async 函数中，async 函数调用不会造成阻塞
-   * content: 待检测的文本内容
+   * @param content 待检测的文本内容
    */
   onSecurityCheck: async function(content){
   var rs = await wx.cloud.callFunction({
@@ -107,46 +131,15 @@ Page({
       data: {
         content: content
       }
-      // success: res => {
-      //   console.log("test test test " )
-      //   console.log((res.result.errCode == 87014))
-      //   return res
-      // },
-      // fail: err => {
-      //   console.error('[云函数] [login] 调用失败', err)
-      // }
     })
-    // get(rs).then(res =>{
-    //   console.log(res)
-    // })
     return rs
   },
 
 
-
-
   /**
-   * Lifecycle function--Called when page show
+   * 获取数据库中某个集合的数据的
+   * @param col  集合名称
    */
-  onShow: function() {
-    var that = this;
-    //调用数据库，获取集合的数据
-    db.collection(GOODS_COLLECTION).get({
-      success: function(res){
-        that.setData({
-          'goods_list': res.data
-        })
-        if(res.data.length==0){
-          that.setData({
-            hiddenemptypart: false
-          })
-        }
-      }
-    })
-    
-  },
-
-  //封装获取数据库数据的方法
   customizeGetDB: function(col){
 
     var that = this;
@@ -163,12 +156,15 @@ Page({
 
   },
 
+
+  /**
+   * modal输入框的输入操作
+   */
   bindmodalinput: function(){
     this.setData({
       //注意到模态框的取消按钮也是绑定的这个函数，
       //所以这里直接取反hiddenmodalput
       hiddenmodalput: !this.data.hiddenmodalput,
-     
     })
 
     setTimeout(()=>{
@@ -179,26 +175,37 @@ Page({
   
   },
 
-
-  //modal框 cancel
+  /**
+   * modal框 取消操作
+   */
   cancel: function(){
     this.setData({
       hiddenmodalput: true
      });
   },
 
-  //modal框 confirm
-  confirm: function(e){
-    
-    var result = this.onSecurityCheck(this.data.goods_name).then(function(res){
-      return res
+  /**
+   * 
+   * modal框确认操作
+   */
+  confirm: async function(e){
+    var that = this
+
+    //内容安全检测  习近平
+    var result =await this.onSecurityCheck(this.data.goods_name).then(function(res){
+        return res;
     })
     
-    console.log("aaaaaaa" +result)
-    if(result == -1){
+    console.log("aaaaaaa" ,result)
+    if(result.result.errCode == 87014){
+      wx.showToast({
+        title: '这个名字不ok哦',
+        icon: 'none'
+      })
       return
     }
-    var that = this
+  
+    //判断名称是否重复
     var l_length = this.data.goods_list.length
     console.log('eweweeeeeeee'+l_length)
     if( l_length!=0){
@@ -264,6 +271,8 @@ Page({
      })
    },
 
+
+   //实时获取输入框中的文本内容
   bindobtain_name: function(e){
     var name = e.detail.value.replace(/\s/g, "")
     this.setData({
@@ -272,7 +281,9 @@ Page({
   },
 
 
-   /**更新物品数量*/
+  /**
+   * 更新物品的数量（增减）
+   */
    bindChangNum(e){
     var that = this
     const index = e.currentTarget.dataset.index
@@ -301,7 +312,9 @@ Page({
     })
   },
 
-  /**删除物品 */
+  /**
+   * 删除物品
+   */
   binddeleteitem(e){
     var that = this
     const index = e.currentTarget.dataset.index

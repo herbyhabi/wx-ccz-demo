@@ -11,9 +11,6 @@ exports.main = async (event,context) => {
       res = await cloud.openapi.security.msgSecCheck({
         content: event.content
       })
-      if (res.errCode == '87014') {
-        return res;
-      }
       return res;
   } catch (err) {
     return err;
