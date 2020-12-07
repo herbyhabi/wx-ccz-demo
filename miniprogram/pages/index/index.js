@@ -190,21 +190,18 @@ Page({
    */
   confirm: async function(e){
     var that = this
-
-    //内容安全检测  习近平
-    var result =await this.onSecurityCheck(this.data.goods_name).then(function(res){
-        return res;
-    })
-    
-    console.log("aaaaaaa" ,result)
-    if(result.result.errCode == 87014){
-      wx.showToast({
-        title: '这个名字不ok哦',
-        icon: 'none'
-      })
-      return
-    }
   
+    //判断名称是否为空，toast提示且不能保存
+  if(this.data.goods_name==''){
+    wx.showToast({
+      title: '名字不能为空哦~',
+      icon: "none",
+      duration: 500,
+      mask:true
+    })
+    return
+  }
+
     //判断名称是否重复
     var l_length = this.data.goods_list.length
     console.log('eweweeeeeeee'+l_length)
@@ -221,13 +218,22 @@ Page({
         }
     }
 
-    //名字为空，toast提示且不能保存
-    if(this.data.goods_name==''){
+    wx.showToast({
+      title: '',
+      icon: 'loading',
+      duration: 500
+    })
+   
+    //内容安全检测
+    var result =await this.onSecurityCheck(this.data.goods_name).then(function(res){
+        return res;
+    })
+    
+    console.log("内容检测结果： " ,result)
+    if(result.result.errCode == 87014){
       wx.showToast({
-        title: '名字不能为空哦~',
-        icon: "none",
-        duration: 500,
-        mask:true
+        title: '这个名字不ok哦!',
+        icon: 'none'
       })
       return
     }
